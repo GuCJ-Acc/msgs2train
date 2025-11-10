@@ -87,9 +87,15 @@ public:
             return;
         }
 
+        Value_RF = buff_PressureValue.front()->pressureValue[0];
+        Value_RH = buff_PressureValue.front()->pressureValue[1];
+        Value_LF = buff_PressureValue.front()->pressureValue[2];
+        Value_LH = buff_PressureValue.front()->pressureValue[3];
 
         double time_PressureValue = buff_PressureValue.front()->header.stamp.toSec();
         double time_MotorState = buff_MotorState.front()->header.stamp.toSec();
+
+
         while ((!buff_MotorState.empty()) && (time_MotorState < time_PressureValue))
         {
             time_MotorState = buff_MotorState.front()->header.stamp.toSec();
