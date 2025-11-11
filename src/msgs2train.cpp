@@ -1,6 +1,7 @@
 #include <ros/ros.h>
 #include <serial/serial.h>
 #include <std_msgs/String.h>
+#include <sensor_msgs/Imu.h>
 #include <sensor_msgs/JointState.h>
 
 #include <iostream>
@@ -20,6 +21,7 @@ class msgs2train
 {
 public:
     std::string Topic_MotorState;
+    std::string Topic_IMUState;
     std::string Topic_PressureValues;
 
     std::mutex mtx_buff;
@@ -31,12 +33,14 @@ public:
 
     ros::NodeHandle nh;
     ros::Subscriber sub_MotorState;
+    ros::Subscriber sub_IMUState;
     ros::Subscriber sub_PressureValues;
 
     bool init_flag_MotorState = false;
     bool init_flag_PressureValue = false;
 
     std::deque<sensor_msgs::JointState::ConstPtr> buff_MotorState;
+    std::deque<sensor_msgs::Imu::ConstPtr> buff_IMUState;
     std::deque<pressure_tr_serial::pressure_info::ConstPtr> buff_PressureValue;
     std::deque<double> buff_time_PressureValue;
     
