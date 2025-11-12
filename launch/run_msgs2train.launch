@@ -1,0 +1,3 @@
+<launch>
+    <node pkg="msgs2train" type="msgs2train" name="msgs2train" output="screen" />
+</launch>
