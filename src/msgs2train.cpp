@@ -61,7 +61,7 @@ public:
         YAML::Node sub_yaml;
         sub_yaml = YAML::LoadFile(std::string(std::string(ROOT_DIR)) + "config/msgs2train.yaml");
         Topic_MotorState = sub_yaml["Topic_MotorState"].as<std::string>();
-        Topic_IMUState = sub_yaml["LimxIMUState"].as<std::string>();
+        Topic_IMUState = sub_yaml["Topic_IMUState"].as<std::string>();
         Topic_PressureValues = sub_yaml["Topic_PressureValues"].as<std::string>();
         saveData_FilePath = sub_yaml["saveData_FilePath"].as<std::string>();
 
@@ -136,7 +136,7 @@ public:
         double time_IMUState = buff_IMUState.front()->header.stamp.toSec();
 
 
-        while ((!buff_MotorState.empty()) && (time_MotorState < time_PressureValue) && (time_MotorState < time_IMUState))
+        while ((!buff_MotorState.empty()))
         {
             time_MotorState = buff_MotorState.front()->header.stamp.toSec();
             if (time_MotorState > time_PressureValue) {
