@@ -2,4 +2,4 @@ Topic_MotorState: "LimxMotorState"
 Topic_IMUState: "LimxIMUState"
 Topic_PressureValues: "totalValue"
 
-saveData_FilePath: "log/data.txt"
+saveData_FilePath: "log/data.csv"
