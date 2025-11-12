@@ -104,6 +104,10 @@ public:
     }
 
 
+    /*****************************************************************
+     * @brief 数据处理的时间同步函数
+     * 
+     ****************************************************************/
     void sync_DataProcess()
     {
         if (buff_MotorState.empty() || buff_PressureValue.empty() || buff_IMUState.empty()) {
