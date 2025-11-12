@@ -38,9 +38,9 @@ public:
     double imu_Gyro_x, imu_Gyro_y, imu_Gyro_z;
     double imu_Quat_x, imu_Quat_y, imu_Quat_z, imu_Quat_w;
 
-    double motor_q[12];     // LF/LH/RF/RH;  HAA/HFE/KFE/WHL;
-    double motor_dq[12];
-    double motor_tau[12];
+    double motor_q[16];     // LF/LH/RF/RH;  HAA/HFE/KFE/WHL;
+    double motor_dq[16];
+    double motor_tau[16];
 
     ros::NodeHandle nh;
     ros::Subscriber sub_MotorState;
