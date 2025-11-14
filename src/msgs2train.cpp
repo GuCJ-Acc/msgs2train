@@ -27,12 +27,18 @@ public:
 
     std::ofstream data2File;
 
+    bool Use_Digital;
+    int Threshold_LF;
+    int Threshold_LH;
+    int Threshold_RF;
+    int Threshold_RH; 
+
     std::mutex mtx_buff;
 
-    int Value_RF;
-    int Value_RH;
     int Value_LF;
     int Value_LH;
+    int Value_RF;
+    int Value_RH; 
 
     double imu_Acc_x, imu_Acc_y, imu_Acc_z;
     double imu_Gyro_x, imu_Gyro_y, imu_Gyro_z;
@@ -64,6 +70,11 @@ public:
         Topic_IMUState = sub_yaml["Topic_IMUState"].as<std::string>();
         Topic_PressureValues = sub_yaml["Topic_PressureValues"].as<std::string>();
         saveData_FilePath = sub_yaml["saveData_FilePath"].as<std::string>();
+        Use_Digital = sub_yaml["Use_Digital"].as<bool>();
+        Threshold_LF = sub_yaml["Threshold_LF"].as<int>();
+        Threshold_LH = sub_yaml["Threshold_LH"].as<int>();
+        Threshold_RF = sub_yaml["Threshold_RF"].as<int>();
+        Threshold_RH = sub_yaml["Threshold_RH"].as<int>();
 
         saveData_FilePath = std::string(std::string(ROOT_DIR)) + saveData_FilePath;
         int reflash_File = system((std::string("exec rm ") + saveData_FilePath).c_str());
@@ -103,6 +114,35 @@ public:
         mtx_buff.unlock();
     }
 
+    /*****************************************************************
+     * @brief 使用模拟量或者数字量保存轮胎状态
+     * 
+     ****************************************************************/
+    void pressureValue_Digital_or_Analog()
+    {
+        if (Use_Digital)
+        {
+            if (Value_LF < Threshold_LF)
+            {   Value_LF = 0;   }
+            else
+            {   Value_LF = 1;   }
+
+            if (Value_LH < Threshold_LH)
+            {   Value_LH = 0;   }
+            else
+            {   Value_LH = 1;   }
+
+            if (Value_RF < Threshold_RF)
+            {   Value_RF = 0;   }
+            else
+            {   Value_RF = 1;   }
+
+            if (Value_RH < Threshold_RH)
+            {   Value_RH = 0;   }
+            else
+            {   Value_RH = 1;   }
+        }
+    }
 
     /*****************************************************************
      * @brief 数据处理的时间同步函数
@@ -118,6 +158,7 @@ public:
         Value_RH = buff_PressureValue.front()->pressureValue[1];
         Value_LF = buff_PressureValue.front()->pressureValue[2];
         Value_LH = buff_PressureValue.front()->pressureValue[3];
+        pressureValue_Digital_or_Analog();
 
         imu_Acc_x = buff_IMUState.front()->linear_acceleration.x;
         imu_Acc_y = buff_IMUState.front()->linear_acceleration.y;
