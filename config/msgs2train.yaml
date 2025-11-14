@@ -3,3 +3,9 @@ Topic_IMUState: "LimxIMUState"
 Topic_PressureValues: "totalValue"
 
 saveData_FilePath: "log/data.csv"
+
+Use_Digital: "false"
+Threshold_LF: "1800"
+Threshold_LH: "1800"
+Threshold_RF: "1800"
+Threshold_RH: "1800"
