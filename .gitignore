@@ -1,2 +1,4 @@
 log/*.csv
 log/*.txt
+scrips/*.png
+fig/*.png
