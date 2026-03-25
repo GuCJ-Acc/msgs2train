@@ -2,7 +2,7 @@ Topic_MotorState: "LimxMotorState"
 Topic_IMUState: "LimxIMUState"
 Topic_PressureValues: "totalValue"
 
-saveData_FilePath: "log/data.csv"
+saveData_FilePath: "log/tempt.csv"
 
 Use_Digital: "false"
 Threshold_LF: "1800"
