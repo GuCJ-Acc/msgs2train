@@ -38,7 +38,12 @@ public:
     int Value_LF;
     int Value_LH;
     int Value_RF;
-    int Value_RH; 
+    int Value_RH;
+
+    int Contact_LF = 0;
+    int Contact_LH = 0;
+    int Contact_RF = 0;
+    int Contact_RH = 0;
 
     double imu_Acc_x, imu_Acc_y, imu_Acc_z;
     double imu_Gyro_x, imu_Gyro_y, imu_Gyro_z;
@@ -53,6 +58,7 @@ public:
     ros::Subscriber sub_IMUState;
     ros::Subscriber sub_PressureValues;
 
+    bool init_fileHeader = false;
     bool init_flag_MotorState = false;
     bool init_flag_PressureValue = false;
 
@@ -82,7 +88,8 @@ public:
         sub_MotorState = nh.subscribe<sensor_msgs::JointState>(Topic_MotorState, 1000, &msgs2train::Topic_MotorState_CallBack, this, ros::TransportHints().tcpNoDelay());
         sub_IMUState = nh.subscribe<sensor_msgs::Imu>(Topic_IMUState, 1000, &msgs2train::Topic_IMUState_CallBack, this, ros::TransportHints().tcpNoDelay());
         sub_PressureValues = nh.subscribe<pressure_tr_serial::pressure_info>(Topic_PressureValues, 1000, &msgs2train::Topic_PressureValues_CallBack, this, ros::TransportHints().tcpNoDelay());
-    
+        
+        saveData2File_Header();
     }
 
     ~msgs2train() {}
@@ -120,27 +127,28 @@ public:
      ****************************************************************/
     void pressureValue_Digital_or_Analog()
     {
-        if (Use_Digital)
+        // if (Use_Digital)
         {
+            // Contact State: 0--suspended; 1--contacted;
             if (Value_LF < Threshold_LF)
-            {   Value_LF = 0;   }
+            {   Contact_LF = 0;   }
             else
-            {   Value_LF = 1;   }
+            {   Contact_LF = 1;   }
 
             if (Value_LH < Threshold_LH)
-            {   Value_LH = 0;   }
+            {   Contact_LH = 0;   }
             else
-            {   Value_LH = 1;   }
+            {   Contact_LH = 1;   }
 
             if (Value_RF < Threshold_RF)
-            {   Value_RF = 0;   }
+            {   Contact_RF = 0;   }
             else
-            {   Value_RF = 1;   }
+            {   Contact_RF = 1;   }
 
             if (Value_RH < Threshold_RH)
-            {   Value_RH = 0;   }
+            {   Contact_RH = 0;   }
             else
-            {   Value_RH = 1;   }
+            {   Contact_RH = 1;   }
         }
     }
 
@@ -221,7 +229,9 @@ public:
                 data2File << imu_Quat_w << "," << imu_Quat_x << "," << imu_Quat_y << "," << imu_Quat_z << ",";
 
                 // pressure_value
-                data2File << Value_LF << "," << Value_LH << "," << Value_RF << "," << Value_RH << std::endl;
+                data2File << Value_LF << "," << Value_LH << "," << Value_RF << "," << Value_RH << ",";
+                data2File << Contact_LF << "," << Contact_LH << "," << Contact_RF << "," << Contact_RH << std::endl;
+
 
                 data2File.close();
             }
@@ -238,6 +248,53 @@ public:
         }
 
     }
+
+    void saveData2File_Header()
+    {
+        if ( init_fileHeader )
+            return;
+
+        init_fileHeader = true;
+
+        data2File.open(saveData_FilePath, std::ios::app);
+        if (data2File.is_open())
+        {
+            // Time
+            data2File << std::fixed << "time" << ",";
+
+            // motor
+            // motor_position
+            data2File << "LF_HAA_position" << "," << "LF_HFE_position" << "," << "LF_KFE_position" << "," << "LF_WHL_position" << ",";
+            data2File << "LH_HAA_position" << "," << "LH_HFE_position" << "," << "LH_KFE_position" << "," << "LH_WHL_position" << ",";
+            data2File << "RF_HAA_position" << "," << "RF_HFE_position" << "," << "RF_KFE_position" << "," << "RF_WHL_position" << ",";
+            data2File << "RH_HAA_position" << "," << "RH_HFE_position" << "," << "RH_KFE_position" << "," << "RH_WHL_position" << ",";
+
+            // motor_velocity
+            data2File << "LF_HAA_velocity" << "," << "LF_HFE_velocity" << "," << "LF_KFE_velocity" << "," << "LF_WHL_velocity" << ",";
+            data2File << "LH_HAA_velocity" << "," << "LH_HFE_velocity" << "," << "LH_KFE_velocity" << "," << "LH_WHL_velocity" << ",";
+            data2File << "RF_HAA_velocity" << "," << "RF_HFE_velocity" << "," << "RF_KFE_velocity" << "," << "RF_WHL_velocity" << ",";
+            data2File << "RH_HAA_velocity" << "," << "RH_HFE_velocity" << "," << "RH_KFE_velocity" << "," << "RH_WHL_velocity" << ",";
+
+            // motor_effort
+            data2File << "LF_HAA_effort" << "," << "LF_HFE_effort" << "," << "LF_KFE_effort" << "," << "LF_WHL_effort" << ",";
+            data2File << "LH_HAA_effort" << "," << "LH_HFE_effort" << "," << "LH_KFE_effort" << "," << "LH_WHL_effort" << ",";
+            data2File << "RF_HAA_effort" << "," << "RF_HFE_effort" << "," << "RF_KFE_effort" << "," << "RF_WHL_effort" << ",";
+            data2File << "RH_HAA_effort" << "," << "RH_HFE_effort" << "," << "RH_KFE_effort" << "," << "RH_WHL_effort" << ",";
+
+            // imu
+            data2File << "imu_Acc_x" << "," << "imu_Acc_y" << "," << "imu_Acc_z" <<",";
+            data2File << "imu_Gyro_x" << "," << "imu_Gyro_y" << "," << "imu_Gyro_z" << ",";
+            data2File << "imu_Quat_w" << "," << "imu_Quat_x" << "," << "imu_Quat_y" << "," << "imu_Quat_z" << ",";
+
+            // pressure_value
+            data2File << "LF" << "," << "LH" << "," << "RF" << "," << "RH" << ",";
+            data2File << "Contact_LF" << "," << "Contact_LH" << "," << "Contact_RF" << "," << "Contact_RH" << std::endl;
+
+
+            data2File.close();
+        }
+    }
+
 
     void loop_saveData2File()
     {
