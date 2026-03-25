@@ -1,0 +1,19 @@
+LimxDynamic_WL: 
+  L1: 0.1614
+  L2: 0.280
+  L3: 0.280
+  rW: 0.128
+
+  offset_Angle_HAA: 0.0
+  offset_Angle_HFE: -90.0
+  offset_Angle_KFE: 140.0
+
+  ox: 0.3148
+  oy: 0.0650
+  oz: 0
+
+  body2imu_x: 0
+  body2imu_y: 0
+  body2imu_z: 0
+
+  force_threshold: 110
