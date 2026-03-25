@@ -2,4 +2,7 @@ log/*.csv
 log/*.txt
 scrips/*.png
 scrips/**/*.png
+scrips/**/*.csv
+scrips/**/_pycache_/
+scrips/**/*.pyc
 fig/*.png
