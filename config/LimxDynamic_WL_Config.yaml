@@ -5,8 +5,8 @@ LimxDynamic_WL:
   rW: 0.128
 
   offset_Angle_HAA: 0.0
-  offset_Angle_HFE: -90.0
-  offset_Angle_KFE: 140.0
+  offset_Angle_HFE: 90.0
+  offset_Angle_KFE: -140.0
 
   ox: 0.3148
   oy: 0.0650
