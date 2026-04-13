@@ -8,7 +8,7 @@ import rosbag
 
 
 BAG_PATH = Path("/home/jackgu/Codex/contact_DataProcess/data/Limx-Wheel-Contact-09.bag")
-OUTPUT_PATH = Path("/home/jackgu/ROS_WS/LimxDynamics/src/msgs2train/scrips/log/data.csv")
+OUTPUT_PATH = Path("/home/jackgu/ROS_WS/LimxDynamics/src/msgs2train/scrips/log_data/data_09/data.csv")
 
 MOTOR_TOPIC = "/LimxMotorState"
 IMU_TOPIC = "/LimxIMUState"

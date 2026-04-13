@@ -237,6 +237,7 @@ void LimxDynamics_WL_Kinematic::calculateFootState_Body()
         // 判断是左边还是右边，前面还是后面，用于修正正运动学计算
         // 左边腿：L1/oy > 0; 右边腿：L1/oy < 0, ;
         // 前面腿：ox > 0; 后面腿：ox < 0;
+        // [LF, LH, RF, RH]
         int leftFoot = -1, frontFoot = -1;
         if (i < 2) leftFoot = 1;
         if (i == 0 || i == 2) frontFoot = 1;
