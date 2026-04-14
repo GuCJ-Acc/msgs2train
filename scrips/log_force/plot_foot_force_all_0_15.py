@@ -12,8 +12,8 @@ import numpy as np
 
 
 DATA_FILE = "data_09"
-LOCAL_START_TIME = 0.0
-LOCAL_END_TIME = 15.0
+LOCAL_START_TIME = 155.0
+LOCAL_END_TIME = 160.0
 
 LEG_SETTINGS = {
     "LF": {"leftFoot": 1.0, "frontFoot": 1.0, "color": "#1f77b4"},
