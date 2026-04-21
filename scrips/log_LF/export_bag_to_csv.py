@@ -2,13 +2,21 @@
 
 from pathlib import Path
 import csv
+import sys
 from dataclasses import dataclass
 
 import rosbag
 
 
+SCRIPT_ROOT = Path(__file__).resolve().parents[1]
+if str(SCRIPT_ROOT) not in sys.path:
+    sys.path.insert(0, str(SCRIPT_ROOT))
+from script_config import get_data_file
+
+
+DATA_FILE = get_data_file()
 BAG_PATH = Path("/home/jackgu/Codex/contact_DataProcess/data/Limx-Wheel-Contact-09.bag")
-OUTPUT_PATH = Path("/home/jackgu/ROS_WS/LimxDynamics/src/msgs2train/scrips/log_data/data_09/data.csv")
+OUTPUT_PATH = SCRIPT_ROOT / "log_data" / DATA_FILE / "data.csv"
 
 MOTOR_TOPIC = "/LimxMotorState"
 IMU_TOPIC = "/LimxIMUState"

@@ -3,11 +3,18 @@
 from pathlib import Path
 import csv
 import math
+import sys
 
 import numpy as np
 
+# 获取 DATA_FILE 参数
+SCRIPT_ROOT = Path(__file__).resolve().parents[1]
+if str(SCRIPT_ROOT) not in sys.path:
+    sys.path.insert(0, str(SCRIPT_ROOT))
+from script_config import get_data_file
 
-DATA_FILE = "data_09"
+
+DATA_FILE = get_data_file()
 
 LEG_SETTINGS = {
     "LF": {"leftFoot": 1.0, "frontFoot": 1.0, "threshold": 110.0},      # 113

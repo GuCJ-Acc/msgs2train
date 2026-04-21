@@ -2,6 +2,7 @@
 
 from pathlib import Path
 import csv
+import sys
 
 import matplotlib
 
@@ -10,7 +11,13 @@ import matplotlib.pyplot as plt
 
 
 # Global plot parameters. Update these values to plot any column from data.csv.
-DATA_FILE = "data_09"
+SCRIPT_ROOT = Path(__file__).resolve().parents[1]
+if str(SCRIPT_ROOT) not in sys.path:
+    sys.path.insert(0, str(SCRIPT_ROOT))
+from script_config import get_data_file
+
+
+DATA_FILE = get_data_file()
 TARGET_COLUMN = "LH"
 LOCAL_START_TIME = 12.0
 LOCAL_END_TIME = 20.0
