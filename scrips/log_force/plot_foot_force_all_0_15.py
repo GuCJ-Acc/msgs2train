@@ -19,8 +19,8 @@ from script_config import get_data_file
 
 
 DATA_FILE = get_data_file()
-LOCAL_START_TIME = 155.0
-LOCAL_END_TIME = 160.0
+LOCAL_START_TIME = 87
+LOCAL_END_TIME = 88
 
 LEG_SETTINGS = {
     "LF": {"leftFoot": 1.0, "frontFoot": 1.0, "color": "#1f77b4"},
@@ -223,7 +223,8 @@ def main():
     config_path = (script_dir / "../../config/LimxDynamic_WL_Config.yaml").resolve()
     output_csv_path = save_dir / "Force"  / "data_foot_force_all.csv"
     fig_dir = save_dir / "Force"  / "fig"
-    fig_dir.mkdir(exist_ok=True)
+    output_csv_path.parent.mkdir(parents=True, exist_ok=True)
+    fig_dir.mkdir(parents=True, exist_ok=True)
     output_path = fig_dir / "foot_force_all_0_15.png"
 
     config = load_wl_config(config_path)

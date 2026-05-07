@@ -17,10 +17,10 @@ from script_config import get_data_file
 DATA_FILE = get_data_file()
 
 LEG_SETTINGS = {
-    "LF": {"leftFoot": 1.0, "frontFoot": 1.0, "threshold": 110.0},      # 113
-    "LH": {"leftFoot": 1.0, "frontFoot": -1.0, "threshold": 83.0},      # 95
-    "RF": {"leftFoot": -1.0, "frontFoot": 1.0, "threshold": 105.0},     # 111
-    "RH": {"leftFoot": -1.0, "frontFoot": -1.0, "threshold": 65.0},     # 80
+    "LF": {"leftFoot": 1.0, "frontFoot": 1.0, "threshold": 90.0},      # 113
+    "LH": {"leftFoot": 1.0, "frontFoot": -1.0, "threshold": 95.0},      # 95
+    "RF": {"leftFoot": -1.0, "frontFoot": 1.0, "threshold": 50.0},     # 111
+    "RH": {"leftFoot": -1.0, "frontFoot": -1.0, "threshold": 60.0},     # 80
 }
 
 

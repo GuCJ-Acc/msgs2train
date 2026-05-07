@@ -15,7 +15,7 @@ from script_config import get_data_file
 
 
 DATA_FILE = get_data_file()
-BAG_PATH = Path("/home/jackgu/Codex/contact_DataProcess/data/Limx-Wheel-Contact-09.bag")
+BAG_PATH = Path("/home/jackgu/dataBag/wheelrobot/forest/Limx-Wheel-Contact-wild-forest-02.bag")
 OUTPUT_PATH = SCRIPT_ROOT / "log_data" / DATA_FILE / "data.csv"
 
 MOTOR_TOPIC = "/LimxMotorState"

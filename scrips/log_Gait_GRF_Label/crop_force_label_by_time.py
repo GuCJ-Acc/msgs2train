@@ -13,8 +13,8 @@ from script_config import get_data_file
 
 
 DATA_FILE = get_data_file()
-DEFAULT_START_TIME = 16.0
-DEFAULT_END_TIME = 155.0
+DEFAULT_START_TIME = 16.5
+DEFAULT_END_TIME = 87
 
 
 def parse_args():

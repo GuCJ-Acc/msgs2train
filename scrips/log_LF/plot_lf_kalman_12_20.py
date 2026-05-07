@@ -18,7 +18,7 @@ from script_config import get_data_file
 
 DATA_FILE = get_data_file()
 LOCAL_START_TIME = 12.0
-LOCAL_END_TIME = 20.0
+LOCAL_END_TIME = 155.0
 PROCESS_NOISE = 1e-2
 MEASUREMENT_NOISE = 25.0
 
